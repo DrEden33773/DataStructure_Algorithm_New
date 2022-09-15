@@ -4,6 +4,8 @@ target("DataStructure_Algorithm_New")
     set_kind("binary")
     add_files("src/*.cpp")
     set_languages("c17", "gnuxx20")
+    set_optimize("fastest")
+    add_includedirs("/usr/include", "/usr/local/include")
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

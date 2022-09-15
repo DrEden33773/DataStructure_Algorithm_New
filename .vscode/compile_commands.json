@@ -6,7 +6,10 @@
       "-c",
       "-Qunused-arguments",
       "-m64",
+      "-O3",
       "-std=gnu++20",
+      "-I/usr/include",
+      "-I/usr/local/include",
       "-o",
       "build/.objs/DataStructure_Algorithm_New/cross/x86_64/debug/src/main.cpp.o",
       "src/main.cpp"
