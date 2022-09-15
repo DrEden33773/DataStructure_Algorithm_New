@@ -1,0 +1,16 @@
+[
+  {
+    "directory": "/home/eden/CppProjects/DataStructure_Algorithm_New",
+    "arguments": [
+      "/usr/bin/clang",
+      "-c",
+      "-Qunused-arguments",
+      "-m64",
+      "-std=gnu++20",
+      "-o",
+      "build/.objs/DataStructure_Algorithm_New/cross/x86_64/debug/src/main.cpp.o",
+      "src/main.cpp"
+    ],
+    "file": "src/main.cpp"
+  }
+]
