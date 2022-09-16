@@ -15,6 +15,7 @@
  * @copyright Copyright (c) 2022
  *
  */
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -40,10 +41,45 @@ public:
             return 0;
         }
         // 3. find the closest element in the vector
-        auto closestIndex = [](vector<int>& input) -> int {
+
+        /**
+         * @brief find the index whose element is closest to the given one
+         *        THIS FUNCTION MAY NOT BE CORRECT !!!
+         */
+        auto findClosestIndex = [](vector<int>& input, int& toFind) -> int {
             int index = 0;
+            int left  = 0;
+            int right = input.size() - 1;
+            while (left < right) {
+                int mid = (left + right) / 2;
+                if (input[mid] == toFind) {
+                    index = mid;
+                    break;
+                } else if (input[mid] < toFind) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
             return index;
         };
+        int closestIndex = findClosestIndex(nums, target);
+        // 4. see the index
+        if (closestIndex == 0) {
+            res = (nums[0] + nums[1] + nums[2]);
+        } else if (closestIndex == nums.size() - 1) {
+            res = (nums[closestIndex] + nums[closestIndex - 1] + nums[closestIndex - 2]);
+        } else {
+            // this is the worst case
+            //
+            // now you need to find two nums in remaining vector
+            // whose sum should be the closest to 0
+            auto findRemainSumClosestToZero =
+                [](vector<int>& Arr, int& subIndex) -> int {
+                int closestSum = 0;
+                return closestSum;
+            };
+        }
         return res;
     }
 };
