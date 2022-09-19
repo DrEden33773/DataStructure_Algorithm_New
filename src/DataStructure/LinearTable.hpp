@@ -87,8 +87,14 @@ with {%zu} as parameter\n",
 
     void realloc(const size_t& newCapacity) {
         if (newCapacity < size) {
-            printf("! size => {%zu}, but newCapacity => {%zu}\n", size, newCapacity);
-            printf("To avoid discarding data, `realloc()` function will not be called.\n\n");
+            printf(
+                "Attention! size => {%zu}, but newCapacity => {%zu}.\n",
+                size,
+                newCapacity
+            );
+            printf(
+                "To avoid discarding data, `realloc()` function will not be called.\n\n"
+            );
             return;
         }
         unique_ptr<T[]> tmpData = make_unique<T[]>(newCapacity);
@@ -102,22 +108,22 @@ with {%zu} as parameter\n",
     void clear() {
         size = 0;
         printf(
-            "Called `clear()` function. Capacity is still {%zu}\n",
+            "Called `clear()` function. Capacity is still {%zu}.\n",
             capacity
         );
         printf(
-            "It should be noticed that `clear()` is the same as `erase()`"
+            "It should be noticed that `clear()` is the same as `erase()`."
         );
     }
 
     void erase() {
         size = 0;
         printf(
-            "Called `erase()` function. Capacity is still {%zu}\n",
+            "Called `erase()` function. Capacity is still {%zu}.\n",
             capacity
         );
         printf(
-            "It should be noticed that `erase()` is the same as `clear()`"
+            "It should be noticed that `erase()` is the same as `clear()`."
         );
     }
 
