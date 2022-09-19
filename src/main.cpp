@@ -6,6 +6,7 @@
 #include "Algorithm/Problem/Transition_Of_Num_And_String.hpp"
 #include "Algorithm/Problem/yanghui_tri.hpp"
 #include "Algorithm/Sort/radix_sort_jr.hpp"
+#include "DataStructure/LinearTable.hpp"
 
 int main() {
     // N_Step::interface();
@@ -22,6 +23,7 @@ int main() {
     Sum_of_Three_Num::example();
     LongestValidColumnStr::example();
     Transition_Of_Num_And_String::example();
+    LinearTable<int>::example();
 
     return 0;
 }
