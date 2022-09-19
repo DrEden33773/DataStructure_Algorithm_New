@@ -42,14 +42,15 @@ public:
         if (ifInitted) {
             printf(
                 "Attention! The linear table has been initialized \
-earlier than this function being called\n "
+earlier than this function being called\n"
             );
             printf(
                 "So its best to call the `realloc` function \
-with {%zu} parameter\n",
+with {%zu} as parameter\n",
                 newCapacity
             );
         }
+        printf("\n");
     }
 
     void push(const T& input) {
@@ -72,6 +73,18 @@ with {%zu} parameter\n",
         return size;
     }
 
+    [[nodiscard]] size_t getCapacity() const {
+        return capacity;
+    }
+
+    void showSize() const {
+        printf("Current Size: %zu", getSize());
+    }
+
+    void showCapacity() const {
+        printf("Current Capacity: %zu", getCapacity());
+    }
+
     void realloc(const size_t& newCapacity) {
         if (newCapacity < size) {
             printf("! size => {%zu}, but newCapacity => {%zu}\n", size, newCapacity);
@@ -84,6 +97,28 @@ with {%zu} parameter\n",
         }
         data.reset(tmpData.release());
         capacity = newCapacity;
+    }
+
+    void clear() {
+        size = 0;
+        printf(
+            "Called `clear()` function. Capacity is still {%zu}\n",
+            capacity
+        );
+        printf(
+            "It should be noticed that `clear()` is the same as `erase()`"
+        );
+    }
+
+    void erase() {
+        size = 0;
+        printf(
+            "Called `erase()` function. Capacity is still {%zu}\n",
+            capacity
+        );
+        printf(
+            "It should be noticed that `erase()` is the same as `clear()`"
+        );
     }
 
     void printWithFmt() const {
@@ -100,6 +135,7 @@ with {%zu} parameter\n",
         printf("\n");
         LinearTable<int>::changeCapacity(4);
         auto Test = make_shared<LinearTable<int>>();
+        LinearTable<int>::changeCapacity(2);
         for (int i = 1; i <= 6; ++i) {
             Test->push(i);
         }
