@@ -5,6 +5,7 @@
 #include "Algorithm/Problem/Sum_of_Three_Num.hpp"
 #include "Algorithm/Problem/Transition_Of_Num_And_String.hpp"
 #include "Algorithm/Problem/yanghui_tri.hpp"
+#include "Algorithm/Sort/RadixSort.hpp"
 #include "Algorithm/Sort/radix_sort_jr.hpp"
 #include "DataStructure/LinearTable.hpp"
 
@@ -24,6 +25,7 @@ int main() {
     LongestValidColumnStr::example();
     Transition_Of_Num_And_String::example();
     LinearTable<int>::example();
+    RadixSort::example();
 
     return 0;
 }

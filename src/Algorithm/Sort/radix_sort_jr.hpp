@@ -115,6 +115,7 @@ void RadixSortJr::abstract_from_bondVec(std::vector<int>& input) {
         input[scannedNums] = bond.val;
         scannedNums += 1;
     }
+    bondVec.erase(bondVec.begin(), bondVec.end());
 }
 
 void RadixSortJr::println_Vec(std::vector<int>& input) {
