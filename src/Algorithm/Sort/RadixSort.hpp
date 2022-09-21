@@ -100,7 +100,7 @@ private:
 public:
     vector<int> generateVec() {
         vector<int> gen {};
-        constexpr int length = 12;
+        const int length = 12;
         gen.reserve(length);
         srand(time(nullptr));
         function<int(const int&, const int&)> getPower
@@ -115,9 +115,9 @@ public:
             return res;
         };
         for (int i = 0; i < length; ++i) {
-            constexpr int max       = (length * length);
+            const int max           = (length * length);
             const int MAX_DANGEROUS = getPower(length, length);
-            constexpr int min       = 1;
+            const int min           = 1;
             int tmp                 = (rand() % (MAX_DANGEROUS - min + 1)) + 1; // tmp in [min, max]
             gen.emplace_back(tmp);
         }
