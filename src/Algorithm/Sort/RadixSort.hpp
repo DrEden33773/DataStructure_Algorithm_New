@@ -154,6 +154,8 @@ public:
         // clean
         DAA.erase(DAA.begin(), DAA.end());
         bondVec.erase(bondVec.begin(), bondVec.end());
+        DAA.shrink_to_fit();
+        bondVec.shrink_to_fit();
         highest_bit_POS = -1;
     };
     static void example() {
