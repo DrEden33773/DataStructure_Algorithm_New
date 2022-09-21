@@ -103,7 +103,7 @@ public:
         constexpr int length = 12;
         gen.reserve(length);
         srand(time(nullptr));
-        constexpr auto getPower
+        function<int(const int&, const int&)> getPower
             = [](const int& x, const int& n) -> int {
             int res = 1;
             if (x == 2) {
