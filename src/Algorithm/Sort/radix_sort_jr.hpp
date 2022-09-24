@@ -71,10 +71,10 @@ void RadixSortJr::init_bondVec(std::vector<int>& input) {
 }
 
 void RadixSortJr::DAA_Sort(KEY input, const int& ToSortLen) {
-    DAA.reserve(ToSortLen);
+    DAA.reserve(ToSortLen + 1);
     // initialize DAA => necessary
     std::vector<bond> init_elem {};
-    for (int i = 0; i < ToSortLen; i++) {
+    for (int i = 0; i <= ToSortLen; i++) {
         DAA.emplace_back(init_elem);
     }
     // bondVec ==push=> DAA

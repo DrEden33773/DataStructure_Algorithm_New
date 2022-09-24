@@ -50,10 +50,10 @@ private:
     };
     void DAA_Sort(int& KeyPOS, const int& ToSortLen) {
         // 0. init DAA
-        DAA.reserve(ToSortLen);
+        DAA.reserve(ToSortLen + 1);
         // initialize DAA => necessary
         std::vector<bond> init_elem {};
-        for (int i = 0; i < ToSortLen; i++) {
+        for (int i = 0; i <= ToSortLen; i++) {
             DAA.emplace_back(init_elem);
         }
         // 1. bondVec ==to==> DAA
