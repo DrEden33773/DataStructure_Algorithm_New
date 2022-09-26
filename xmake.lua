@@ -3,7 +3,7 @@ add_rules("mode.debug", "mode.release")
 target("DataStructure_Algorithm_New")
     set_kind("binary")
     add_files("src/*.cpp")
-    set_languages("c17", "gnuxx20")
+    set_languages("clatest", "gnuxxlatest")
     set_optimize("fastest")
     add_includedirs("/usr/include", "/usr/local/include")
 --

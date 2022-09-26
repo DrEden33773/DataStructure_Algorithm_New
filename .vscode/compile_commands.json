@@ -1,19 +1,6 @@
 [
-  {
-    "directory": "/home/eden/CppProjects/DataStructure_Algorithm_New",
-    "arguments": [
-      "/usr/bin/clang",
-      "-c",
-      "-Qunused-arguments",
-      "-m64",
-      "-O3",
-      "-std=gnu++20",
-      "-I/usr/include",
-      "-I/usr/local/include",
-      "-o",
-      "build/.objs/DataStructure_Algorithm_New/cross/x86_64/debug/src/main.cpp.o",
-      "src/main.cpp"
-    ],
-    "file": "src/main.cpp"
-  }
-]
+{
+  "directory": "/home/eden/CppProjects/DataStructure_Algorithm_New",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-g", "-O3", "-std=gnu++23", "-I/usr/include", "-I/usr/local/include", "-o", "build/.objs/DataStructure_Algorithm_New/linux/x86_64/debug/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
+}]
