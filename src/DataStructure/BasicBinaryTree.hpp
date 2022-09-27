@@ -75,11 +75,11 @@ public:
 
     auto normalOrderIterate(node* inputNode, bool ifPrint = true) -> void {
         assert(numOfNodes != 0);
-        if (ifPrint) {
-            cout << inputNode->value << " ";
-        }
         if (inputNode == nullptr) {
             return;
+        }
+        if (ifPrint) {
+            cout << inputNode->value << " ";
         }
         normalOrderIterate(inputNode->left);
         normalOrderIterate(inputNode->right);
