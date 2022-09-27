@@ -21,8 +21,6 @@ private:
 
         node* nextLeft  = nullptr; // nextRight & nextLeft => to the next step
         node* nextRight = nullptr;
-        node* left      = nullptr; // right & left => in the same step
-        node* right     = nullptr;
         node* prev      = nullptr; // prev => to the previous step
 
         node(T& inputValue) { value = inputValue; }
