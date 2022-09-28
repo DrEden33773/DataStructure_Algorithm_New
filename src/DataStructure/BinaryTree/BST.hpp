@@ -14,6 +14,7 @@
 #include <functional>
 #include <initializer_list>
 #include <iostream>
+#include <queue>
 
 template <typename T>
 class BST {
@@ -24,7 +25,7 @@ private:
         Node* right  = nullptr;
         Node* parent = nullptr;
 
-        explicit Node(T&& inputValue) { value = inputValue; }
+        explicit Node(T& inputValue) { value = inputValue; }
     };
     enum class direction {
         left,
@@ -48,12 +49,22 @@ public:
     /// @brief this allows => `BST<int> testBST = { 1, 2, 3 }`
     /// @param initList
     BST(std::initializer_list<T>&& initList) {
-        for (auto&& element : initList) {
+        for (auto element : initList) {
             add(element);
         }
     }
 
-    void insert(T&& inputValue) {
+    explicit BST(std::vector<T>& initList) {
+        for (auto element : initList) {
+            add(element);
+        }
+    }
+
+    ~BST() {
+        delAllNode();
+    }
+
+    void insert(T& inputValue) {
         // 1. init
         Node* toAdd                 = new Node(inputValue);
         Node* attachedTo            = root;
@@ -114,9 +125,9 @@ public:
         }
     }
 
-    void add(T&& inputValue) { insert(inputValue); }
+    void add(T& inputValue) { insert(inputValue); }
 
-    bool ifExist(T&& inputValue) {
+    bool ifExist(T& inputValue) {
         if (numOfNodes == 0) {
             return false;
         }
@@ -127,6 +138,7 @@ public:
         while (curr != nullptr) {
             if (inputValue == curr->value) {
                 res = true;
+                break; // remember to break!!!!
             } else if (inputValue > curr->value) {
                 curr = curr->right;
             } else {
@@ -137,7 +149,7 @@ public:
         return res;
     }
 
-    Node* search(T&& inputValue) {
+    Node* search(T& inputValue) {
         if (numOfNodes == 0) {
             return nullptr;
         }
@@ -148,6 +160,7 @@ public:
         while (curr != nullptr) {
             if (inputValue == curr->value) {
                 res = curr;
+                break; // remember to break!!!!
             } else if (inputValue > curr->value) {
                 curr = curr->right;
             } else {
@@ -226,22 +239,7 @@ public:
         return curr->value;
     }
 
-    /// @brief remove
-    /// @param inputValue
-    /// @param ifUseRightMin => true, use right sub tree's min && false, use
-    /// left sub tree's max
-    void remove(T&& inputValue, bool ifUseRightMin = false) {
-        bool existence = ifExist(inputValue);
-        if (!existence) {
-            std::cout << "{ " << inputValue << " }"
-                      << " doesn't exist, removing will be ignored!"
-                      << std::endl;
-            return;
-        }
-
-        // now you should remove
-        Node* toRemove = search(inputValue);
-
+    void delNode(Node* toDel, bool ifUseRightMin = false) {
         std::function<void(Node*)> disconnectWithParent = [](Node* toRemove) {
             assert(toRemove != nullptr);
             if (toRemove->parent == nullptr) {
@@ -267,7 +265,22 @@ public:
 
         /// @brief rmSingleParent (will delete)
         std::function<void(Node*)> remove1 = [&](Node* toRemove) {
+            // need to judge => if toRemove == root
+
             assert(toRemove != nullptr);
+
+            // if toRemove == root
+            if (toRemove->parent == nullptr) {
+                if (toRemove->left != nullptr) {
+                    root = toRemove->left;
+                } else {
+                    root = toRemove->right;
+                }
+                root->parent = nullptr; // this is a signature!
+                delete toRemove;
+                --numOfNodes;
+                return;
+            }
 
             direction sideToReAttach = direction::uncertain;
             if (toRemove == toRemove->parent->left) {
@@ -316,61 +329,138 @@ public:
         auto rmDoubleParent = remove2;
 
         bool ifRecursive = false;
-        if (toRemove->left == nullptr && toRemove->right == nullptr) {
-            rmLeaf(toRemove);
-        } else if (toRemove->left != nullptr && toRemove->right != nullptr) {
-            rmDoubleParent(toRemove);
+        if (toDel->left == nullptr && toDel->right == nullptr) {
+            rmLeaf(toDel);
+        } else if (toDel->left != nullptr && toDel->right != nullptr) {
+            rmDoubleParent(toDel);
             ifRecursive = true;
         } else {
-            rmSingleParent(toRemove);
+            rmSingleParent(toDel);
         }
 
         if (ifRecursive) {
             if (!ifUseRightMin) {
-                Node* nextToRemove = maxNodePtr(toRemove->left);
-                remove(nextToRemove);
+                Node* nextToRemove = maxNodePtr(toDel->left);
+                delNode(nextToRemove);
             } else {
-                Node* nextToRemove = minNodePtr(toRemove->right);
-                remove(nextToRemove, true);
+                Node* nextToRemove = minNodePtr(toDel->right);
+                delNode(nextToRemove, true);
             }
         }
     }
+    void remove(T inputValue, bool ifUseRightMin = false) {
+        bool existence = ifExist(inputValue);
+        if (!existence) {
+            std::cout << "{ " << inputValue << " }"
+                      << " doesn't exist, removing will be ignored!"
+                      << std::endl;
+            return;
+        }
 
-    void preOrderPrint(Node* in) {
+        // now you should remove
+        Node* toDel = search(inputValue);
+
+        delNode(toDel);
+    }
+
+    void preOPT(Node* in) {
         if (in == nullptr) {
             return;
         }
         std::cout << in->value << " ";
-        preOrderPrint(in->left);
-        preOrderPrint(in->right);
+        preOPT(in->left);
+        preOPT(in->right);
+    }
+    void preOrderPrint() {
+        preOPT(root);
     }
 
-    void midOrderPrint(Node* in) {
+    void midOPT(Node* in) {
         if (in == nullptr) {
             return;
         }
-        preOrderPrint(in->left);
+        midOPT(in->left);
         std::cout << in->value << " ";
-        preOrderPrint(in->right);
+        midOPT(in->right);
+    }
+    void midOrderPrint() {
+        midOPT(root);
     }
 
-    void laterOrderPrint(Node* in) {
+    void lateOPT(Node* in) {
         if (in == nullptr) {
             return;
         }
-        preOrderPrint(in->left);
-        preOrderPrint(in->right);
+        lateOPT(in->left);
+        lateOPT(in->right);
         std::cout << in->value << " ";
     }
+    void laterOrderPrint() {
+        lateOPT(root);
+    }
 
-    void echo() { preOrderPrint(root); }
+    void echo() {
+        midOrderPrint();
+        std::cout << std::endl;
+    }
+
+    void delAllNode() {
+        // BFS-liked delete
+        Node* firstToDel = root;
+
+        std::queue<Node*> BFQ;
+
+        BFQ.push(root);
+
+        while (!BFQ.empty()) {
+            Node* toDel = BFQ.front();
+            if (toDel->left) {
+                BFQ.push(toDel->left);
+            }
+            if (toDel->right) {
+                BFQ.push(toDel->right);
+            }
+            delete toDel;
+            BFQ.pop();
+        }
+    }
 
     static void example() {
-        BST<int> int_BST = { 1, 2, 7, 2, 9, 20, 12 };
-        std::cout << "init int_BST with {1,2,7,2,9,20,12}, echo => "
-                  << std::endl;
-        std::cout << "\t";
+        BST<int> int_BST = { 1, 2, 7, 9, 20, 12 };
+        std::cout << "init int_BST with {1,2,7,9,20,12}, echo => ";
         int_BST.echo();
         //
+        int_BST.remove(1);
+        int_BST.echo();
+        int_BST.remove(20);
+        int_BST.echo();
+        int_BST.remove(7);
+        int_BST.echo();
+        // maybe okay
+
+        std::cout << std::endl;
+
+        // randomly init
+        std::vector<int> toInit;
+        toInit.reserve(14);
+        srand(time(nullptr));
+        for (int i = 0; i < 12; ++i) {
+            int toInput = rand() % 10000 - 1;
+            toInit.emplace_back(toInput);
+        }
+
+        std::cout << "Here's the randomly generated initList => " << std::endl;
+        for (auto&& elem : toInit) {
+            std::cout << elem << " ";
+        }
+        std::cout << std::endl
+                  << std::endl;
+
+        BST<int> int_BST_final(toInit);
+        int_BST_final.echo();
+        for (int p = 2; p <= 5; ++p) {
+            int_BST_final.remove(toInit[p]);
+            int_BST_final.echo();
+        }
     }
 };

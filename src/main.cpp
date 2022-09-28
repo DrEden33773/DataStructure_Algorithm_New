@@ -28,5 +28,7 @@ int main() {
     LinearTable<int>::example();
     RadixSort::example();
 
+    BST<int>::example();
+
     return 0;
 }
