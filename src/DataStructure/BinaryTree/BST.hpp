@@ -24,9 +24,7 @@ private:
         Node* right  = nullptr;
         Node* parent = nullptr;
 
-        explicit Node(T&& inputValue) {
-            value = inputValue;
-        }
+        explicit Node(T&& inputValue) { value = inputValue; }
     };
     enum class direction {
         left,
@@ -41,13 +39,9 @@ private:
     size_t numOfNodes = 0;
 
 public:
-    void numOfNodes_plus_1() {
-        ++numOfNodes;
-    }
+    void numOfNodes_plus_1() { ++numOfNodes; }
 
-    void numOfNodes_sub_1() {
-        --numOfNodes;
-    }
+    void numOfNodes_sub_1() { --numOfNodes; }
 
     BST() = default;
 
@@ -108,7 +102,8 @@ public:
                 toAdd->parent     = attachedTo;
                 break;
             case direction::uncertain:
-                std::cout << "unexpected error occurs! exit program!" << std::endl;
+                std::cout << "unexpected error occurs! exit program!"
+                          << std::endl;
                 exit(-1);
             };
         }
@@ -119,9 +114,7 @@ public:
         }
     }
 
-    void add(T&& inputValue) {
-        insert(inputValue);
-    }
+    void add(T&& inputValue) { insert(inputValue); }
 
     bool ifExist(T&& inputValue) {
         if (numOfNodes == 0) {
@@ -235,7 +228,8 @@ public:
 
     /// @brief remove
     /// @param inputValue
-    /// @param ifUseRightMin => true, use right sub tree's min && false, use left sub tree's max
+    /// @param ifUseRightMin => true, use right sub tree's min && false, use
+    /// left sub tree's max
     void remove(T&& inputValue, bool ifUseRightMin = false) {
         bool existence = ifExist(inputValue);
         if (!existence) {
@@ -296,7 +290,8 @@ public:
             } else if (sideToReAttach == direction::left) {
                 reAttached->left = theChild;
             } else {
-                std::cout << "unexpected error occurs! exit program!" << std::endl;
+                std::cout << "unexpected error occurs! exit program!"
+                          << std::endl;
                 exit(-1);
             }
             theChild->parent = reAttached;
@@ -368,13 +363,12 @@ public:
         std::cout << in->value << " ";
     }
 
-    void echo() {
-        preOrderPrint(root);
-    }
+    void echo() { preOrderPrint(root); }
 
     static void example() {
         BST<int> int_BST = { 1, 2, 7, 2, 9, 20, 12 };
-        std::cout << "init int_BST with {1,2,7,2,9,20,12}, echo => " << std::endl;
+        std::cout << "init int_BST with {1,2,7,2,9,20,12}, echo => "
+                  << std::endl;
         std::cout << "\t";
         int_BST.echo();
         //
