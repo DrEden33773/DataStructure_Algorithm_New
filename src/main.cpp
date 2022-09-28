@@ -7,6 +7,7 @@
 #include "Algorithm/Problem/yanghui_tri.hpp"
 #include "Algorithm/Sort/RadixSort.hpp"
 #include "Algorithm/Sort/radix_sort_jr.hpp"
+#include "DataStructure/BinaryTree/BST.hpp"
 #include "DataStructure/LinearTable.hpp"
 
 int main() {

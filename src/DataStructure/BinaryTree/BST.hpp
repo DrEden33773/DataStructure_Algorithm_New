@@ -340,4 +340,42 @@ public:
             }
         }
     }
+
+    void preOrderPrint(Node* in) {
+        if (in == nullptr) {
+            return;
+        }
+        std::cout << in->value << " ";
+        preOrderPrint(in->left);
+        preOrderPrint(in->right);
+    }
+
+    void midOrderPrint(Node* in) {
+        if (in == nullptr) {
+            return;
+        }
+        preOrderPrint(in->left);
+        std::cout << in->value << " ";
+        preOrderPrint(in->right);
+    }
+
+    void laterOrderPrint(Node* in) {
+        if (in == nullptr) {
+            return;
+        }
+        preOrderPrint(in->left);
+        preOrderPrint(in->right);
+        std::cout << in->value << " ";
+    }
+
+    void echo() {
+        preOrderPrint(root);
+    }
+
+    static void example() {
+        BST<int> int_BST = { 1, 2, 7, 2, 9, 20, 12 };
+        std::cout << "init int_BST with {1,2,7,2,9,20,12}, echo => " << std::endl;
+        std::cout << "\t";
+        int_BST.echo();
+    }
 };
