@@ -1,23 +1,29 @@
-/// @brief AVL_TREE
+/**
+ * @file AVL.hpp
+ * @author Eden (edwardwang33773@gmail.com)
+ * @brief an AVL tree
+ * @version 0.1
+ * @date 2022-09-29
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 
 #include <bits/stdc++.h>
-#include <iterator>
 
 template <typename T>
-class AVLTree {
+class AVL {
 public:
     enum class nodeType : unsigned short {
         root  = 0,
         inner = 1,
         leaf  = 2,
     };
-
     enum class direction : unsigned short {
         left      = 0,
         right     = 1,
         uncertain = 2,
     };
-
     struct Node {
         T        value;
         Node*    parent       = nullptr;
@@ -53,6 +59,8 @@ public:
             }
         }
     };
+    Node*  root = nullptr;
+    size_t size = 0;
 
 private:
 };
