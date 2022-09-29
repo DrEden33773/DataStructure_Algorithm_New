@@ -31,6 +31,7 @@ public:
         explicit Node(T& inputValue) {
             this->value = inputValue;
             this->judgeType();
+            this->setFloor();
         }
 
         void judgeType() {
