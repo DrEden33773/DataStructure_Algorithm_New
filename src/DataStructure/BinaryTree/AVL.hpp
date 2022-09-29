@@ -110,8 +110,8 @@ public:
         }
     }
 
+    void add(T& value) { insert(value); }
     void insert(T& value) { }
-    void add(T& value) { }
     void LL_Rotate(Node* from) { }
     void RR_Rotate(Node* from) { }
     void LR_Rotate(Node* from) { }
@@ -154,12 +154,33 @@ public:
         return res;
     }
 
-    void preOrderEcho() { }
-    void midOrderEcho() { }
-    void lateOrderEcho() { }
-    void preOrderOPT(Node* from) { }
-    void midOrderOPT(Node* from) { }
-    void lateOrderOPT(Node* from) { }
+    void preOrderOPT(Node* from) {
+        if (from == nullptr) {
+            return;
+        }
+        std::cout << from->value << " ";
+        preOrderOPT(from->left);
+        preOrderOPT(from->right);
+    }
+    void midOrderOPT(Node* from) {
+        if (from == nullptr) {
+            return;
+        }
+        midOrderOPT(from->left);
+        std::cout << from->value << " ";
+        midOrderOPT(from->right);
+    }
+    void lateOrderOPT(Node* from) {
+        if (from == nullptr) {
+            return;
+        }
+        lateOrderOPT(from->left);
+        lateOrderOPT(from->right);
+        std::cout << from->value << " ";
+    }
+    void preOrderEcho() { preOrderOPT(root); }
+    void midOrderEcho() { midOrderOPT(root); }
+    void lateOrderEcho() { lateOrderOPT(root); }
 
     void delAllNodes() {
         // BFS-liked delete
