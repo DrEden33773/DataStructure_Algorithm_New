@@ -14,13 +14,14 @@
 #include <functional>
 #include <initializer_list>
 #include <iostream>
+#include <ostream>
 #include <queue>
 
 template <typename T>
 class BST {
 private:
     struct Node {
-        T value;
+        T     value;
         Node* left   = nullptr;
         Node* right  = nullptr;
         Node* parent = nullptr;
@@ -36,7 +37,7 @@ private:
         isRoot,
         nonRoot,
     };
-    Node* root        = nullptr;
+    Node*  root       = nullptr;
     size_t numOfNodes = 0;
 
 public:
@@ -66,8 +67,8 @@ public:
 
     void insert(T& inputValue) {
         // 1. init
-        Node* toAdd                 = new Node(inputValue);
-        Node* attachedTo            = root;
+        Node*     toAdd             = new Node(inputValue);
+        Node*     attachedTo        = root;
         direction whichSideToAttach = direction::uncertain;
 
         // 2. set corruption flag
@@ -132,7 +133,7 @@ public:
             return false;
         }
 
-        bool res   = false;
+        bool  res  = false;
         Node* curr = root;
 
         while (curr != nullptr) {
@@ -441,6 +442,10 @@ public:
         std::cout << std::endl;
 
         // randomly init
+        std::cout << "Next, a `vector` with 12 elements will be generated." << std::endl;
+        std::cout << "Each element is a random int between 1 and 10000 (contain)." << std::endl;
+        std::cout << std::endl;
+
         std::vector<int> toInit;
         toInit.reserve(14);
         srand(time(nullptr));
